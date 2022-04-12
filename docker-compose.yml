@@ -1,11 +1,18 @@
 version: "3.6"
+volumes:
+  mongodb_data:
+    driver: local
+  pritunl_data:
+    driver: local
+
 services:
   vpn:
     container_name: vpn
     build:
       context: ./vpn
     environment:
-      - COUNTRY_CODE=CH
+      - COUNTRY_CODE=US
+      # - COUNTRY_CODE=CH
     cap_add:
       - NET_ADMIN
     devices:
@@ -15,3 +22,23 @@ services:
     tty: true
     ports:
       - "0.0.0.0:6881-6999:6881-6999"
+
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    volumes:
+      - "mongodb_data:/data"
+
+  pritunl:
+    image: jippi/pritunl
+    environment:
+      - PRITUNL_MONGODB_URI=mongodb://mongodb:27017/pritunl
+    volumes:
+      - pritunl_data:/var/lib/pritunl
+      - mongodb_data:/var/lib/mongodb
+    privileged: true
+    ports:
+      - "1194:1194/tcp"
+      - "1194:1194/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"

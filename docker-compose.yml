@@ -1,0 +1,17 @@
+version: "3.6"
+services:
+  vpn:
+    container_name: vpn
+    build:
+      context: ./vpn
+    environment:
+      - COUNTRY_CODE=CH
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    command: /bin/sh -c "protonvpn connect --cc $${COUNTRY_CODE} && watch -n 5 protonvpn status 2>/dev/null"
+    stdin_open: true
+    tty: true
+    ports:
+      - "0.0.0.0:6881-6999:6881-6999"

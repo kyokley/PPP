@@ -17,8 +17,11 @@ build-no-cache:
 		--build-arg PROTONVPN_PLAN=$$PROTONVPN_PLAN \
 		--build-arg PROTONVPN_PROTOCOL=$$PROTONVPN_PROTOCOL \
 
-shell: build
-	docker-compose run --rm rawr /bin/sh
+pritunl-shell:
+	docker-compose exec pritunl /bin/bash
+
+up:
+	docker-compose up
 
 down:
 	docker-compose down

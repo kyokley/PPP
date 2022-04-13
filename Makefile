@@ -6,7 +6,7 @@ build:
 		--build-arg PROTONVPN_USER=$$PROTONVPN_USER \
 		--build-arg PROTONVPN_PASSWORD=$$PROTONVPN_PASSWORD \
 		--build-arg PROTONVPN_PLAN=$$PROTONVPN_PLAN \
-		--build-arg PROTONVPN_PROTOCOL=$$PROTONVPN_PROTOCOL \
+		--build-arg PROTONVPN_PROTOCOL=$$PROTONVPN_PROTOCOL
 
 build-no-cache:
 	docker-compose build \
@@ -15,7 +15,7 @@ build-no-cache:
 		--build-arg PROTONVPN_USER=$$PROTONVPN_USER \
 		--build-arg PROTONVPN_PASSWORD=$$PROTONVPN_PASSWORD \
 		--build-arg PROTONVPN_PLAN=$$PROTONVPN_PLAN \
-		--build-arg PROTONVPN_PROTOCOL=$$PROTONVPN_PROTOCOL \
+		--build-arg PROTONVPN_PROTOCOL=$$PROTONVPN_PROTOCOL
 
 pritunl-shell:
 	docker-compose exec pritunl /bin/bash

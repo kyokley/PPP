@@ -1,6 +1,6 @@
-.PHONY: build shell
+.PHONY: build shell create-dirs
 
-build:
+build: create-dirs
 	docker-compose build \
 		--parallel \
 		--build-arg PROTONVPN_USER=$$PROTONVPN_USER \
@@ -8,7 +8,7 @@ build:
 		--build-arg PROTONVPN_PLAN=$$PROTONVPN_PLAN \
 		--build-arg PROTONVPN_PROTOCOL=$$PROTONVPN_PROTOCOL
 
-build-no-cache:
+build-no-cache: create-dirs
 	docker-compose build \
 		--no-cache \
 		--parallel \
@@ -20,7 +20,7 @@ build-no-cache:
 pritunl-shell:
 	docker-compose exec pritunl /bin/bash
 
-up:
+up: create-dirs
 	docker-compose up
 
 down:
@@ -28,3 +28,6 @@ down:
 
 logs:
 	docker-compose logs -f
+
+create-dirs:
+	mkdir -p pritunl/mongodb pritunl/pritunl

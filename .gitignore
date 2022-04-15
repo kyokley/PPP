@@ -1,2 +1,6 @@
 .env
+
+# Can't ignore the proton dir because it contains custom code, however, pritunl
+# and pihole can be.
 pritunl
+pihole

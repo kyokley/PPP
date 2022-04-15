@@ -36,7 +36,7 @@ services:
     image: pihole/pihole:latest
     # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
     ports:
-      - "127.0.0.1:9090:80/tcp"
+      - "127.0.0.1:9091:80/tcp"
     #   - "53:53/tcp"
     #   - "53:53/udp"
     #   - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
@@ -44,6 +44,7 @@ services:
     environment:
       TZ: 'America/Chicago'
       WEBPASSWORD: $PIHOLE_PASSWORD
+      VIRTUAL_HOST: $VIRTUAL_HOST
     # Volumes store your data between container upgrades
     volumes:
       - './pihole/etc-pihole:/etc/pihole'

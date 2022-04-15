@@ -21,7 +21,8 @@ pritunl-shell:
 	docker-compose exec pritunl /bin/bash
 
 up: create-dirs
-	docker-compose up
+	docker-compose up -d
+	docker-compose logs -f
 
 down:
 	docker-compose down

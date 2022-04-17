@@ -26,8 +26,8 @@ services:
   softether:
     image: siomiz/softethervpn
     environment:
-      - SPW=$SPW
-      - HPW=$HPW
+      - SPW=$SOFTETHER_SPW
+      - HPW=$SOFTETHER_HPW
     volumes:
       - ./softether/vpn_server.config:/usr/vpnserver/vpn_server.config
     depends_on:

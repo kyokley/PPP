@@ -17,8 +17,8 @@ build-no-cache: create-dirs
 		--build-arg PROTONVPN_PLAN=$$PROTONVPN_PLAN \
 		--build-arg PROTONVPN_PROTOCOL=$$PROTONVPN_PROTOCOL
 
-pritunl-shell:
-	docker-compose exec pritunl /bin/bash
+vpn-shell:
+	docker-compose exec softether /bin/bash
 
 up: create-dirs
 	docker-compose up -d
@@ -31,4 +31,7 @@ logs:
 	docker-compose logs -f
 
 create-dirs:
-	mkdir -p pritunl/mongodb pritunl/pritunl
+	mkdir -p softether
+
+vpn-template: create-dirs
+	docker-compose run --rm --no-deps --name vpnconf softether echo > softether/vpn_server.config

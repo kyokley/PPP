@@ -23,12 +23,13 @@ services:
       - "127.0.0.1:8080:80/tcp"
       - "127.0.0.1:8443:443/tcp"
 
-  pritunl:
-    image: jippi/pritunl
+  softether:
+    image: siomiz/softethervpn
+    environment:
+      - SPW=$SPW
+      - HPW=$HPW
     volumes:
-      - ./pritunl/pritunl:/var/lib/pritunl
-      - ./pritunl/mongodb:/var/lib/mongodb
-      - ./pritunl/pritunl.conf:/etc/pritunl.conf
+      - ./softether/vpn_server.config:/usr/vpnserver/vpn_server.config
     depends_on:
       - proton
       - pihole

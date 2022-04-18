@@ -18,11 +18,11 @@ build-no-cache: create-dirs
 		--build-arg PROTONVPN_PROTOCOL=$$PROTONVPN_PROTOCOL
 
 vpn-shell:
-	docker-compose exec softether /bin/bash
+	docker-compose exec wireguard /bin/bash
 
 up: create-dirs
 	docker-compose up -d
-	docker-compose logs -f
+	docker-compose logs -f wireguard
 
 down:
 	docker-compose down
@@ -31,7 +31,4 @@ logs:
 	docker-compose logs -f
 
 create-dirs:
-	mkdir -p softether
-
-vpn-template: create-dirs
-	docker-compose run --rm --no-deps --name vpnconf softether echo > softether/vpn_server.config
+	mkdir -p wireguard

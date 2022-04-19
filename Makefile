@@ -17,12 +17,12 @@ build-no-cache: create-dirs
 		--build-arg PROTONVPN_PLAN=$$PROTONVPN_PLAN \
 		--build-arg PROTONVPN_PROTOCOL=$$PROTONVPN_PROTOCOL
 
-pritunl-shell:
+vpn-shell:
 	docker-compose exec pritunl /bin/bash
 
 up: create-dirs
 	docker-compose up -d
-	docker-compose logs -f
+	docker-compose logs -f pritunl
 
 down:
 	docker-compose down

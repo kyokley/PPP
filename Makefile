@@ -31,6 +31,9 @@ up: create-dirs
 down:
 	docker-compose down
 
+proton-status:
+	docker-compose exec proton /bin/sh -c 'protonvpn status'
+
 logs:
 	docker-compose logs -f
 

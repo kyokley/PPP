@@ -10,7 +10,8 @@ services:
       - NET_ADMIN
     devices:
       - /dev/net/tun
-    command: /bin/sh -c "protonvpn connect --cc $${COUNTRY_CODE} && watch -n 600 protonvpn status 2>/dev/null"
+    # command: /bin/sh -c "protonvpn connect --cc $${COUNTRY_CODE} && watch -n 600 protonvpn status 2>/dev/null"
+    command: /bin/sh -c "protonvpn connect -r && watch -n 600 protonvpn status 2>/dev/null"
     stdin_open: true
     tty: true
     restart: "unless-stopped"

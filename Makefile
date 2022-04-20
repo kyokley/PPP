@@ -25,7 +25,8 @@ pihole-shell:
 
 up: create-dirs
 	docker-compose up -d
-	docker-compose logs -f pritunl
+	docker-compose exec pihole /bin/bash -c 'ip route add 192.168.245.0/24 via 172.20.128.2' || true
+	docker-compose logs -f
 
 down:
 	docker-compose down

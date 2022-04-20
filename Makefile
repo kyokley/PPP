@@ -36,3 +36,5 @@ logs:
 
 create-dirs:
 	mkdir -p pritunl/mongodb pritunl/pritunl
+
+restart: down up

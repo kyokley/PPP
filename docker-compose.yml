@@ -36,6 +36,7 @@ services:
     network_mode: service:proton
     cap_add:
       - NET_ADMIN
+    restart: unless-stopped
 
   pihole:
     image: pihole/pihole:latest

@@ -10,8 +10,8 @@ services:
       - NET_ADMIN
     devices:
       - /dev/net/tun
-    # command: /bin/sh -c "protonvpn connect --cc $${COUNTRY_CODE} && watch -n 600 protonvpn status 2>/dev/null"
-    command: /bin/sh -c "protonvpn connect -r && watch -n 600 protonvpn status 2>/dev/null"
+    command: /bin/sh -c "protonvpn connect --cc $${COUNTRY_CODE} && watch -n 600 protonvpn status 2>/dev/null"
+    # command: /bin/sh -c "protonvpn connect -r && watch -n 600 protonvpn status 2>/dev/null"
     stdin_open: true
     tty: true
     restart: "unless-stopped"
@@ -43,8 +43,8 @@ services:
       static-network:
         ipv4_address: 172.20.128.3
     # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
-    ports:
-      - "127.0.0.1:9091:80/tcp"
+    # ports:
+      # - "127.0.0.1:9091:80/tcp"
       # - "53:53/tcp"
       # - "53:53/udp"
     #   - "67:67/udp" # Only required if you are using Pi-hole as your DHCP server

@@ -44,4 +44,4 @@ restart: down up
 upgrade-pihole:
 	docker pull pihole/pihole
 
-upgrade: upgrade-pihole restart
+upgrade: upgrade-pihole build restart

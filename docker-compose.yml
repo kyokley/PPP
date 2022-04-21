@@ -39,7 +39,8 @@ services:
     restart: unless-stopped
 
   pihole:
-    image: pihole/pihole:latest
+    build:
+      context: ./pihole
     networks:
       static-network:
         ipv4_address: 172.20.128.3
@@ -54,6 +55,7 @@ services:
       TZ: 'America/Chicago'
       WEBPASSWORD: $PIHOLE_PASSWORD
       VIRTUAL_HOST: $VIRTUAL_HOST
+    command: /bin/sh -c 'ip route add 192.168.245.0/24 via 172.20.128.2 && /s6-init'
     # Volumes store your data between container upgrades
     volumes:
       - './pihole/etc-pihole:/etc/pihole'

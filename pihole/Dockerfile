@@ -1,0 +1,3 @@
+FROM pihole/pihole
+
+ENTRYPOINT []

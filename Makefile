@@ -1,4 +1,4 @@
-.PHONY: build shell create-dirs
+.PHONY: build shell create-dirs restart upgrade upgrade-pihole
 
 build: create-dirs
 	docker-compose build \
@@ -40,3 +40,8 @@ create-dirs:
 	mkdir -p pritunl/mongodb pritunl/pritunl
 
 restart: down up
+
+upgrade-pihole:
+	docker pull pihole/pihole
+
+upgrade: upgrade-pihole restart

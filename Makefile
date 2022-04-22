@@ -35,6 +35,15 @@ proton-status:
 logs:
 	docker-compose logs -f
 
+proton-logs:
+	docker-compose logs -f proton
+
+pritunl-logs:
+	docker-compose logs -f pritunl
+
+pihole-logs:
+	docker-compose logs -f pihole
+
 create-dirs:
 	mkdir -p pritunl/mongodb pritunl/pritunl
 

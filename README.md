@@ -11,14 +11,8 @@ The following variables should be defined in your shell, or even better, in a `.
 |---------------------|--------------------------|
 | PROTONVPN_USER      | OpenVPN / IKEv2 username |
 | PROTONVPN_PASSWORD  | OpenVPN / IKEv2 password |
-| PROTONVPN_PLAN      | ProtonVPN Plan:          |
-|                     | 1 for Free               |
-|                     | 2 for Basic              |
-|                     | 3 for Plus               |
-|                     | 4 for Visionary          |
-| PROTONVPN_PROTOCOL  | ProtonVPN Protocol:      |
-|                     | 1 for UDP                |
-|                     | 2 for TCP                |
+| PROTONVPN_PLAN      | ProtonVPN Plan: <br> 1 for Free <br> 2 for Basic <br> 3 for Plus <br> 4 for Visionary |
+| PROTONVPN_PROTOCOL  | ProtonVPN Protocol: <br> 1 for UDP <br> 2 for TCP |
 | PIHOLE_PASSWORD     | Password for PiHole      |
 | PIHOLE_VIRTUAL_HOST | Server host name         |
 

@@ -2,20 +2,12 @@
 
 build: create-dirs
 	docker-compose build \
-		--parallel \
-		--build-arg PROTONVPN_USER=$$PROTONVPN_USER \
-		--build-arg PROTONVPN_PASSWORD=$$PROTONVPN_PASSWORD \
-		--build-arg PROTONVPN_PLAN=$$PROTONVPN_PLAN \
-		--build-arg PROTONVPN_PROTOCOL=$$PROTONVPN_PROTOCOL
+		--parallel
 
 build-no-cache: create-dirs
 	docker-compose build \
 		--no-cache \
-		--parallel \
-		--build-arg PROTONVPN_USER=$$PROTONVPN_USER \
-		--build-arg PROTONVPN_PASSWORD=$$PROTONVPN_PASSWORD \
-		--build-arg PROTONVPN_PLAN=$$PROTONVPN_PLAN \
-		--build-arg PROTONVPN_PROTOCOL=$$PROTONVPN_PROTOCOL
+		--parallel
 
 vpn-shell:
 	docker-compose exec pritunl /bin/bash

@@ -5,7 +5,7 @@ PPP stands for Pritunl, Pi-hole, and ProtonVPN. The main goal is to increase sec
 PPP is designed to be run through docker containers (docker-compose). Various commands are included in the Makefile as a convenience.
 
 ### Building
-The following variables should be defined in your shell, or even better, in a `.env` file before trying to build. The variables that should be defined are listed below:
+The following environment variables should be defined in your shell, or even better, in a `.env` file before trying to build. The variables that should be defined are listed below:
 
 | Variable            | Description              |
 |---------------------|--------------------------|
@@ -15,6 +15,17 @@ The following variables should be defined in your shell, or even better, in a `.
 | PROTONVPN_PROTOCOL  | ProtonVPN Protocol: <br> 1 for UDP <br> 2 for TCP |
 | PIHOLE_PASSWORD     | Password for PiHole      |
 | PIHOLE_VIRTUAL_HOST | Server host name         |
+
+Once all variables have been set, run
+```make build```
+to build all containers.
+
+### Running
+Run
+```
+make up
+```
+to bring up all containers.
 
 ## DataFlow
 ![Sequence Diagram](/../images/images/request_flow.png?raw=true)

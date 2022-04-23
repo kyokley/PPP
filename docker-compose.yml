@@ -47,7 +47,7 @@ services:
     environment:
       TZ: 'America/Chicago'
       WEBPASSWORD: $PIHOLE_PASSWORD
-      VIRTUAL_HOST: $VIRTUAL_HOST
+      VIRTUAL_HOST: $PIHOLE_VIRTUAL_HOST
     command: /bin/sh -c 'ip route add 192.168.245.0/24 via 172.20.128.2 && /s6-init'
     volumes:
       - './pihole/etc-pihole:/etc/pihole'

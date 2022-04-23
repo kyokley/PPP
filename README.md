@@ -17,7 +17,9 @@ The following environment variables should be defined in your shell, or even bet
 | PIHOLE_VIRTUAL_HOST | Server host name         |
 
 Once all variables have been set, run
-```make build```
+```
+make build
+```
 to build all containers.
 
 ### Running

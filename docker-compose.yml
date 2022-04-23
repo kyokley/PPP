@@ -4,6 +4,11 @@ services:
   proton:
     build:
       context: ./proton
+      args:
+        - PROTONVPN_USER=$PROTONVPN_USER
+        - PROTONVPN_PASSWORD=$PROTONVPN_PASSWORD
+        - PROTONVPN_PLAN=$PROTONVPN_PLAN
+        - PROTONVPN_PROTOCOL=$PROTONVPN_PROTOCOL
     environment:
       - COUNTRY_CODE=US
     cap_add:

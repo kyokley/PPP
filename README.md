@@ -30,4 +30,23 @@ make up
 to bring up all containers.
 
 ## DataFlow
-![Sequence Diagram](/../images/images/request_flow.png?raw=true)
+```mermaid
+sequenceDiagram
+    actor User
+    participant Pritunl
+    participant PiHole
+    participant Proton
+    participant Internet
+
+    User ->> Pritunl: Request Website
+    Pritunl ->> PiHole: DNS Request
+    alt Blocked Domain (Ads, Trackers, and Malware)
+        PiHole ->> User: Not Found
+    else Valid Domain
+        PiHole ->> Internet: Make Upstream DNS Request (OpenDNS)
+        Internet ->> Pritunl: Return IP
+        Pritunl ->> Proton: Make Request through Upstream VPN
+        Proton ->> Internet: Server Request
+        Internet ->> User: Return Website
+    end
+```

@@ -38,6 +38,7 @@ pihole-logs:
 
 create-dirs:
 	mkdir -p pritunl/mongodb pritunl/pritunl
+	touch pritunl/pritunl.conf
 
 restart: down up
 

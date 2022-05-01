@@ -1,11 +1,11 @@
 # PPP
-PPP stands for Pritunl, Pi-hole, and ProtonVPN. The main goal is to increase security and improve privacy protections for users. By using a Pritunl VPN, PPP aims to share a Pi-hole configuration among multiple users in various locations. Therefore, in addition to the usual benefits of using a VPN, ad, tracker, and malware blocking is automatically included. Connections are further routed through an upstream ProtonVPN server for additional IP obfuscation.
+PPP stands for Pritunl, Pi-hole, and ProtonVPN. The main goal is to increase security and improve privacy protections for users that may be in different physical locations. By using a Pritunl VPN, PPP aims to share a Pi-hole configuration among multiple users. Therefore, as well as the usual benefits of using a VPN, PPP automatically includes ad, tracker, and malware blocking. Connections are further routed through an upstream ProtonVPN server for additional IP obfuscation.
 
 ## Installation
-PPP is designed to be run through docker containers (docker-compose). Various commands are included in the Makefile as a convenience.
+PPP is designed to be run through docker containers (using docker-compose).
 
 ### Building
-The following variables should be defined in your shell, or even better, in a `.env` file before trying to build. The variables that should be defined are listed below:
+The following environment variables should be defined in your shell, or even better, in a `.env` file before trying to build. The variables that should be defined are listed below:
 
 | Variable            | Description              |
 |---------------------|--------------------------|
@@ -13,8 +13,40 @@ The following variables should be defined in your shell, or even better, in a `.
 | PROTONVPN_PASSWORD  | OpenVPN / IKEv2 password |
 | PROTONVPN_PLAN      | ProtonVPN Plan: <br> 1 for Free <br> 2 for Basic <br> 3 for Plus <br> 4 for Visionary |
 | PROTONVPN_PROTOCOL  | ProtonVPN Protocol: <br> 1 for UDP <br> 2 for TCP |
-| PIHOLE_PASSWORD     | Password for PiHole      |
+| PIHOLE_PASSWORD     | Password for Pi-hole     |
 | PIHOLE_VIRTUAL_HOST | Server host name         |
 
+Once all variables have been set, run
+```
+make build
+```
+to build all containers.
+
+### Running
+Run
+```
+make up
+```
+to bring up all containers.
+
 ## DataFlow
-![Sequence Diagram](/../images/images/request_flow.png?raw=true)
+```mermaid
+sequenceDiagram
+    actor User
+    participant Pritunl
+    participant PiHole
+    participant Proton
+    participant Internet
+
+    User ->> Pritunl: Request Website
+    Pritunl ->> PiHole: DNS Request
+    alt Blocked Domain (Ads, Trackers, and Malware)
+        PiHole ->> User: Not Found
+    else Valid Domain
+        PiHole ->> Internet: Make Upstream DNS Request (OpenDNS)
+        Internet ->> Pritunl: Return IP
+        Pritunl ->> Proton: Make Request through Upstream VPN
+        Proton ->> Internet: Server Request
+        Internet ->> User: Return Website
+    end
+```

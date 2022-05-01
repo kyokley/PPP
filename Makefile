@@ -45,4 +45,7 @@ restart: down up
 upgrade-pihole:
 	docker pull pihole/pihole
 
-upgrade: upgrade-pihole build restart
+upgrade-pritunl:
+	docker pull jippi/pritunl
+
+upgrade: upgrade-pihole upgrade-pritunl build restart

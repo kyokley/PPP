@@ -12,6 +12,8 @@ build-no-cache: create-dirs
 vpn-shell:
 	docker-compose exec pritunl /bin/bash
 
+pritunl-shell: vpn-shell
+
 pihole-shell:
 	docker-compose exec pihole /bin/bash
 

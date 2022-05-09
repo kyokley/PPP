@@ -46,6 +46,6 @@ upgrade-pihole:
 	docker pull pihole/pihole
 
 upgrade-pritunl:
-	docker pull jippi/pritunl
+	docker pull kyokley/pritunl
 
 upgrade: upgrade-pihole upgrade-pritunl build restart

@@ -33,7 +33,7 @@ services:
     image: kyokley/pritunl
     volumes:
       - ./pritunl/pritunl:/var/lib/pritunl
-      - ./pritunl/mongodb:/var/lib/mongodb
+      - ./pritunl/mongodb:/data/db
       - ./pritunl/pritunl.conf:/etc/pritunl.conf
     depends_on:
       - proton

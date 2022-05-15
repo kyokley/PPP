@@ -30,10 +30,10 @@ services:
       - "127.0.0.1:8443:443/tcp"
 
   pritunl:
-    image: jippi/pritunl
+    image: kyokley/pritunl
     volumes:
       - ./pritunl/pritunl:/var/lib/pritunl
-      - ./pritunl/mongodb:/var/lib/mongodb
+      - ./pritunl/mongodb:/data/db
       - ./pritunl/pritunl.conf:/etc/pritunl.conf
     depends_on:
       - proton

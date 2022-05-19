@@ -33,7 +33,7 @@ proton-logs:
 	docker-compose logs -f proton
 
 pritunl-logs:
-	docker-compose exec pritunl /bin/tail -n 500 -f /var/log/pritunl.log
+	docker-compose exec pritunl tail -n 500 -f /var/log/pritunl.log
 
 pihole-logs:
 	docker-compose logs -f pihole

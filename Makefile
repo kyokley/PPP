@@ -1,42 +1,42 @@
 .PHONY: build shell create-dirs restart upgrade upgrade-pihole
 
+# Edit DOCKER_OVERRIDE if using a different upstream VPN config
+DOCKER_OVERRIDE=docker-compose.proton.yml
+
+DOCKER_COMPOSE_ARGS=-f docker-compose.yml -f ${DOCKER_OVERRIDE}
+
 build: create-dirs
-	docker-compose build \
+	docker-compose ${DOCKER_COMPOSE_ARGS} build \
 		--parallel
 
 build-no-cache: create-dirs
-	docker-compose build \
+	docker-compose ${DOCKER_COMPOSE_ARGS} build \
 		--no-cache \
 		--parallel
 
-vpn-shell:
-	docker-compose exec pritunl /bin/bash
-
-pritunl-shell: vpn-shell
+pritunl-shell:
+	docker-compose ${DOCKER_COMPOSE_ARGS} exec pritunl /bin/bash
 
 pihole-shell:
-	docker-compose exec pihole /bin/bash
+	docker-compose ${DOCKER_COMPOSE_ARGS} exec pihole /bin/bash
 
 up: create-dirs
-	docker-compose up -d
+	docker-compose ${DOCKER_COMPOSE_ARGS} up -d
 
 down:
-	docker-compose down
-
-proton-status:
-	docker-compose exec proton /bin/sh -c 'protonvpn status'
+	docker-compose ${DOCKER_COMPOSE_ARGS} down
 
 logs:
-	docker-compose logs -f
+	docker-compose ${DOCKER_COMPOSE_ARGS} logs -f
 
-proton-logs:
-	docker-compose logs -f proton
+vpn-logs:
+	docker-compose ${DOCKER_COMPOSE_ARGS} logs -f vpn
 
 pritunl-logs:
-	docker-compose exec pritunl tail -n 500 -f /var/log/pritunl.log
+	docker-compose ${DOCKER_COMPOSE_ARGS} exec pritunl tail -n 500 -f /var/log/pritunl.log
 
 pihole-logs:
-	docker-compose logs -f pihole
+	docker-compose ${DOCKER_COMPOSE_ARGS} logs -f pihole
 
 create-dirs:
 	mkdir -p pritunl/mongodb pritunl/pritunl

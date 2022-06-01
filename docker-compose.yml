@@ -1,22 +1,11 @@
 version: "3.6"
 
 services:
-  proton:
-    build:
-      context: ./proton
-      args:
-        - PROTONVPN_USER=$PROTONVPN_USER
-        - PROTONVPN_PASSWORD=$PROTONVPN_PASSWORD
-        - PROTONVPN_PLAN=$PROTONVPN_PLAN
-        - PROTONVPN_PROTOCOL=$PROTONVPN_PROTOCOL
-    environment:
-      - COUNTRY_CODE=US
+  vpn:
     cap_add:
       - NET_ADMIN
     devices:
       - /dev/net/tun
-    command: /bin/sh -c "protonvpn connect --cc $${COUNTRY_CODE} && watch -n 600 protonvpn status 2>/dev/null"
-    # command: /bin/sh -c "protonvpn connect -r && watch -n 600 protonvpn status 2>/dev/null"
     stdin_open: true
     tty: true
     restart: "unless-stopped"
@@ -36,9 +25,9 @@ services:
       - ./pritunl/mongodb:/data/db
       - ./pritunl/pritunl.conf:/etc/pritunl.conf
     depends_on:
-      - proton
+      - vpn
       - pihole
-    network_mode: service:proton
+    network_mode: service:vpn
     cap_add:
       - NET_ADMIN
     restart: unless-stopped

@@ -10,5 +10,5 @@ services:
     environment:
       - COUNTRY_CODE=US
     command: /bin/sh -c "protonvpn connect --cc $${COUNTRY_CODE} && watch -n 600 protonvpn status 2>/dev/null"
-    # If we want to get really crazy, Swap IPs every 10 minutes
+    # If we want to get really crazy, connect to a random server worldwide
     # command: /bin/sh -c "protonvpn connect -r && watch -n 600 protonvpn status 2>/dev/null"

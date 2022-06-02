@@ -51,7 +51,7 @@ sequenceDiagram
     end
 ```
 
-## BYO VPN
+## BYO (Bring Your Own) VPN
 Even though PPP was built around using ProtonVPN as the upstream VPN, it should be possible to use any VPN. The structure of the docker-compose.yml is designed to be overridden. Knowledge of docker-compose will be helpful here but is not strictly required. Do the following:
 
 1. Create a new docker-compose config using docker-compose.proton.yml as a guide. The most import part is to update the `command` with whatever command is used to start the VPN.

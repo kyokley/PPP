@@ -10,6 +10,7 @@ RUN apt-get update && \
         mkdir -p /etc/cloudflared && \
         echo ' \n\
 proxy-dns: true \n\
+proxy-dns-address: 0.0.0.0 \n\
 proxy-dns-port: 5353 \n\
 proxy-dns-upstream: \n\
   - https://1.1.1.1/dns-query \n\

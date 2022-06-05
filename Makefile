@@ -38,6 +38,12 @@ pritunl-logs:
 pihole-logs:
 	docker-compose ${DOCKER_COMPOSE_ARGS} logs -f pihole
 
+cloudflared-logs:
+	docker-compose ${DOCKER_COMPOSE_ARGS} logs -f cloudflared
+
+cloudflared-shell:
+	docker-compose ${DOCKER_COMPOSE_ARGS} exec cloudflared /bin/bash
+
 create-dirs:
 	mkdir -p pritunl/mongodb pritunl/pritunl
 	touch pritunl/pritunl.conf

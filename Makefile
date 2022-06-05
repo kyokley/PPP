@@ -24,7 +24,7 @@ up: create-dirs
 	docker-compose ${DOCKER_COMPOSE_ARGS} up -d
 
 down:
-	docker-compose ${DOCKER_COMPOSE_ARGS} down
+	docker-compose ${DOCKER_COMPOSE_ARGS} down --remove-orphans
 
 logs:
 	docker-compose ${DOCKER_COMPOSE_ARGS} logs -f

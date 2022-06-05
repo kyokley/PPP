@@ -50,6 +50,13 @@ services:
     cap_add:
       - NET_ADMIN
 
+  cloudflared:
+    build:
+      context: ./cloudflared
+    networks:
+      static-network:
+        ipv4_address: 172.20.128.4
+
 networks:
   static-network:
     ipam:

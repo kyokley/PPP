@@ -1,5 +1,6 @@
-# PPP(C)
-PPP stands for Pritunl, Pi-hole, Proton VPN (and Cloudflared). The main goal is to increase security and improve privacy protections for users that may be in different physical locations. By using a Pritunl VPN, PPP aims to share a Pi-hole configuration among multiple users. Therefore, as well as the usual benefits of using a VPN, PPP automatically includes ad, tracker, and malware blocking. Upstream DNS requests from the Pi-hole are made over HTTPS using Cloudflared. Connections are further routed through an upstream Proton VPN server for additional IP obfuscation.
+# PPP (and C)
+PPP stands for Pritunl, Pi-hole, and Proton VPN (...and Cloudflared).  The main goal is to increase security and improve privacy protections for users that may be in different physical locations.  By using a Pritunl VPN, PPP aims to share a Pi-hole configuration among multiple users.  Therefore, as well as the usual benefits of using a VPN, PPP automatically includes ad, tracker, and malware blocking.  Additionally, upstream DNS requests from the Pi-hole are made over HTTPS using Cloudflared.  Connections are further routed through an upstream Proton VPN server for additional IP obfuscation.
+
 
 ## Installation
 PPP is designed to be run through docker containers (using docker-compose).
@@ -47,7 +48,7 @@ sequenceDiagram
         PiHole ->> Cloudflared: DNS Proxy
         Cloudflared ->> Internet: DNS-over-HTTPS Request to (1.1.1.1)
         Internet ->> User: Server IP is Returned
-        User ->> Pritunl: Make Request for Data
+        User ->> Pritunl: Send Request for Data
         Pritunl ->> Proton: Make Request through Upstream VPN
         Proton ->> Internet: Server Request
         Internet ->> User: Return Website
@@ -55,7 +56,7 @@ sequenceDiagram
 ```
 
 ## BYO (Bring Your Own) VPN
-Even though PPP was built around using ProtonVPN as the upstream VPN, it should be possible to use any VPN. The structure of the docker-compose.yml is designed to be overridden. Knowledge of docker-compose will be helpful here but is not strictly required. Do the following:
+Even though PPP was built around using Proton VPN as the upstream VPN, it should be possible to use any VPN. The structure of the docker-compose.yml is designed to be overridden. Knowledge of docker-compose will be helpful here but is not strictly required. Do the following:
 
 1. Create a new docker-compose config using docker-compose.proton.yml as a guide. The most import part is to update the `command` with whatever command is used to start the VPN.
 

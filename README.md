@@ -1,5 +1,5 @@
-# PPP
-PPP stands for Pritunl, Pi-hole, and ProtonVPN. The main goal is to increase security and improve privacy protections for users that may be in different physical locations. By using a Pritunl VPN, PPP aims to share a Pi-hole configuration among multiple users. Therefore, as well as the usual benefits of using a VPN, PPP automatically includes ad, tracker, and malware blocking. Connections are further routed through an upstream ProtonVPN server for additional IP obfuscation.
+# PPP(C)
+PPP stands for Pritunl, Pi-hole, Proton VPN (and Cloudflared). The main goal is to increase security and improve privacy protections for users that may be in different physical locations. By using a Pritunl VPN, PPP aims to share a Pi-hole configuration among multiple users. Therefore, as well as the usual benefits of using a VPN, PPP automatically includes ad, tracker, and malware blocking. Upstream DNS requests from the Pi-hole are made over HTTPS using Cloudflared. Connections are further routed through an upstream Proton VPN server for additional IP obfuscation.
 
 ## Installation
 PPP is designed to be run through docker containers (using docker-compose).
@@ -29,13 +29,14 @@ make up
 ```
 to bring up all containers.
 
-## DataFlow
+## Data Flow
 ```mermaid
 sequenceDiagram
     actor User
     participant Pritunl
     participant PiHole
     participant Proton
+    participant Cloudflared
     participant Internet
 
     User ->> Pritunl: Request Website
@@ -43,8 +44,10 @@ sequenceDiagram
     alt Blocked Domain (Ads, Trackers, and Malware)
         PiHole ->> User: Not Found
     else Valid Domain
-        PiHole ->> Internet: Make Upstream DNS Request (OpenDNS)
-        Internet ->> Pritunl: Return IP
+        PiHole ->> Cloudflared: DNS Proxy
+        Cloudflared ->> Internet: DNS-over-HTTPS Request to (1.1.1.1)
+        Internet ->> User: Server IP is Returned
+        User ->> Pritunl: Make Request for Data
         Pritunl ->> Proton: Make Request through Upstream VPN
         Proton ->> Internet: Server Request
         Internet ->> User: Return Website

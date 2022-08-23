@@ -4,7 +4,7 @@ ENV COLUMNS 80
 
 ARG PROTONVPN_USER PROTONVPN_PASSWORD PROTONVPN_PLAN=2 PROTONVPN_PROTOCOL=1
 
-RUN apk update && apk add --no-cache curl openvpn expect && \
+RUN apk update && apk add --no-cache curl openvpn expect iptables && \
     pip install protonvpn-cli
 
 COPY ./vpn-setup.exp /tmp/

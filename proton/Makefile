@@ -4,6 +4,7 @@ build:
 		--build-arg PROTONVPN_PASSWORD=$$PROTONVPN_PASSWORD \
 		--build-arg PROTONVPN_PLAN=$$PROTONVPN_PLAN \
 		--build-arg PROTONVPN_PROTOCOL=$$PROTONVPN_PROTOCOL \
+		--no-cache \
 		.
 
 shell: build

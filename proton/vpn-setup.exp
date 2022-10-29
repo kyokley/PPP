@@ -21,3 +21,15 @@ send -- "$env(PROTONVPN_PROTOCOL)\r"
 expect "Is this information correct? \\\[Y/n\\\]: "
 send -- "y\r"
 expect eof
+
+spawn protonvpn configure
+# confirmation
+# expect ": "
+# send -- "y\r"
+expect "Please enter your choice or leave empty to quit: "
+send -- "4\r"
+expect "Please enter your choice or leave empty to quit: "
+send -- "2\r"
+expect "Please enter your custom DNS servers (space separated): "
+send -- "172.20.128.3\r"
+expect eof

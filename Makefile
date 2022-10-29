@@ -6,13 +6,10 @@ DOCKER_OVERRIDE=docker-compose.proton.yml
 DOCKER_COMPOSE_ARGS=-f docker-compose.yml -f ${DOCKER_OVERRIDE}
 
 build: create-dirs
-	docker-compose ${DOCKER_COMPOSE_ARGS} build \
-		--parallel
+	docker-compose ${DOCKER_COMPOSE_ARGS} build
 
 build-no-cache: create-dirs
-	docker-compose ${DOCKER_COMPOSE_ARGS} build \
-		--no-cache \
-		--parallel
+	docker-compose ${DOCKER_COMPOSE_ARGS} build --no-cache
 
 pritunl-shell:
 	docker-compose ${DOCKER_COMPOSE_ARGS} exec pritunl /bin/bash

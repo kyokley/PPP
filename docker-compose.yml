@@ -17,6 +17,8 @@ services:
       - "127.0.0.1:9194:1194/udp"
       - "127.0.0.1:8080:80/tcp"
       - "127.0.0.1:8443:443/tcp"
+    dns:
+      - '172.20.128.3'
 
   pritunl:
     image: kyokley/pritunl
@@ -31,6 +33,14 @@ services:
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
+
+  tailscale:
+    image: tailscale/tailscale
+    volumes:
+      - './tailscale/var/lib:/var/lib'
+    restart: unless-stopped
+    command: tailscaled --tun=userspace-networking
+    network_mode: service:vpn
 
   pihole:
     build:

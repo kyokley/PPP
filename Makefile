@@ -17,6 +17,9 @@ pritunl-shell:
 pihole-shell:
 	docker-compose ${DOCKER_COMPOSE_ARGS} exec pihole /bin/bash
 
+tailscale-shell:
+	docker-compose ${DOCKER_COMPOSE_ARGS} exec tailscale /bin/sh
+
 up: create-dirs
 	docker-compose ${DOCKER_COMPOSE_ARGS} up -d
 
@@ -34,6 +37,12 @@ pritunl-logs:
 
 pihole-logs:
 	docker-compose ${DOCKER_COMPOSE_ARGS} logs -f pihole
+
+tailscale-logs:
+	docker-compose ${DOCKER_COMPOSE_ARGS} logs -f tailscale
+
+auth-tailscale:
+	docker-compose ${DOCKER_COMPOSE_ARGS} exec tailscale tailscale up --reset --authkey=$$(cat tailscale.key) --advertise-exit-node
 
 cloudflared-logs:
 	docker-compose ${DOCKER_COMPOSE_ARGS} logs -f cloudflared
